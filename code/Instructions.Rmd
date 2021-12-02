@@ -1,0 +1,44 @@
+---
+title: "Using simulation to understand the role of scale"
+author: "Matt Williamson"
+date: "11/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Your assignment
+
+The goals for this assignment are to:
+
+- introduce simulation as a means of understanding complicated models
+- explore how scale affects the interpretation of spatial processes
+- fit a model based on spatial covariates
+
+_By the end of the assignment_ you should have a publication-quality static map and a functional interactive map
+
+
+# Task 1: Load your libraries and simulate some points
+Following the example load the necessary packages and simulate 4 different point processes. One should be completely spatially random, the other 3 should involve changing the function used create different spatial patterns of points.
+
+
+# Task 2: Use quadrat counts to test for spatial randomness
+Use at least 3 different grains for your quadrats and conduct the Chi-square test on your points for each grain. 
+
+_Question 1:_ How does changing the grain size affect your results? Were any of the processes you simulated insensitive to the choice of grain? Why might this be?
+
+
+# Task 3: Simulate a regression outcome
+Following the example, simulate a regression outcome based on known relations between your predictor and the outcome and a known relative buffer size.
+
+# Task 4: Fit a model 
+make sure that you get the correct result back.
+
+# Task 5: Experiement with different buffer sizes
+Now generate new dataframes (leaving the outcome alone) based on 3 different buffer sizes and refit your model. 
+
+_Question 2:_How does changing your buffer size affect your ability to get the proper parameter estimate back?
+
