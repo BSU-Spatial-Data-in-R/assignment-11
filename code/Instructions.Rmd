@@ -1,7 +1,7 @@
 ---
-title: "Using simulation to understand the role of scale"
+title: "Event Distribution Models"
 author: "Matt Williamson"
-date: "11/11/2021"
+date: "12/02/2021"
 output: html_document
 ---
 
@@ -9,36 +9,39 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+This week I've simulated some presence absence data using bioclimatic variables to help you explore the different modeling approaches we discussed on Tuesday. 
 
 ## Your assignment
 
 The goals for this assignment are to:
 
-- introduce simulation as a means of understanding complicated models
-- explore how scale affects the interpretation of spatial processes
-- fit a model based on spatial covariates
+* Introduce the dismo pacakage for species distribution modeling
+* Compare logistic regression, randomForest, and maxent models
+* Explore the effects of using true absences and different numbers of background points
 
-_By the end of the assignment_ you should have a publication-quality static map and a functional interactive map
-
-
-# Task 1: Load your libraries and simulate some points
-Following the example load the necessary packages and simulate 4 different point processes. One should be completely spatially random, the other 3 should involve changing the function used create different spatial patterns of points.
+_By the end of the assignment_ have fit logistic regression, randomForest, and maxent models using both true absences and 3 different 'levels' of background points (e.g., bg equal to presences, 5x as many bg points, 20x as many bg points). 
 
 
-# Task 2: Use quadrat counts to test for spatial randomness
-Use at least 3 different grains for your quadrats and conduct the Chi-square test on your points for each grain. 
+# Task 1: Load your libraries, the presence/absence data, and the bioclimatic variables.
+Following the example load the necessary packages, points, and bioclimatic variables. The rasters and points are all stored in the `session28` folder in our shared drive.
 
-_Question 1:_ How does changing the grain size affect your results? Were any of the processes you simulated insensitive to the choice of grain? Why might this be?
+# Task 2: Run a logistic regression
+You'll need to extract the predictor values at each point, then run a logistic regression (using `glm`) using two predictors. Run a second logistic regression using four predictors.
 
+_Question 1:_ Which predictors are most important? How do you know?
 
-# Task 3: Simulate a regression outcome
-Following the example, simulate a regression outcome based on known relations between your predictor and the outcome and a known relative buffer size.
+_Question 2:_ How does adding predictors affect the estimates of the regression coefficients for the two predictors that were in your original model? What about the intercept? Why might that be?
 
-# Task 4: Fit a model 
-make sure that you get the correct result back.
+# Task 3: Run a randomForest Model
+Following the example, run a randomForest model on the same dataset, but use all of the predictors.
 
-# Task 5: Experiement with different buffer sizes
-Now generate new dataframes (leaving the outcome alone) based on 3 different buffer sizes and refit your model. 
+_Question 3:_ Are the variable importance estimates from the randomForest model consistent with those in the regression? Meaning do they exhibit similar qualitative relations to those we saw in the logistic regression?
 
-_Question 2:_How does changing your buffer size affect your ability to get the proper parameter estimate back?
+# Task 4: Fit a maxent model
+Following the example, fit a maxent model using the actual absence points and all of the predictors. 
+
+# Task 5: Experiment with different numbers of background points
+In the first pass through the models you used both the presence and absence points. Now I want you to use only the presence points (so drop the absences from your dataframe) and generate three different background point scenarios. Fit each model to the presence-background data using all of the predictors. You'll need to extract the covariate values to your background data each time.
+
+_Question 4:_How does changing the number of background points affect the estimates of your regression coefficients and intercepts? Do some model types perform better than others.
 
